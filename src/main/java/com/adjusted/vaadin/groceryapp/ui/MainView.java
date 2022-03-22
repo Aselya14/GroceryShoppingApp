@@ -5,9 +5,7 @@ import com.adjusted.vaadin.groceryapp.ui.utils.BakeryConst;
 import com.adjusted.vaadin.groceryapp.ui.views.HasConfirmation;
 import com.adjusted.vaadin.groceryapp.ui.views.admin.products.ProductsView;
 import com.adjusted.vaadin.groceryapp.ui.views.admin.users.UsersView;
-import com.adjusted.vaadin.groceryapp.ui.views.dashboard.DashboardView;
 import com.adjusted.vaadin.groceryapp.ui.views.person.PersonView;
-import com.adjusted.vaadin.groceryapp.ui.views.storefront.StorefrontView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -31,7 +29,7 @@ import java.util.Optional;
 import static com.adjusted.vaadin.groceryapp.ui.utils.BakeryConst.*;
 
 @Viewport(BakeryConst.VIEWPORT)
-@PWA(name = "Bakery App Starter", shortName = "Vaadin Demo Bakery App",
+@PWA(name = "Url shoplist application", shortName = "UrlShopper",
 		startPath = "login",
 		backgroundColor = "#227aef", themeColor = "#227aef",
 		offlinePath = "offline-page.html",
@@ -48,7 +46,7 @@ public class MainView extends AppLayout {
 		confirmDialog.setCancelButtonTheme("raised tertiary");
 
 		this.setDrawerOpened(false);
-		Span appName = new Span("Vaadin Demo Bakery App");
+		Span appName = new Span("Url opener application");
 		appName.addClassName("hide-on-mobile");
 
 		menu = createMenuTabs();
@@ -95,9 +93,7 @@ public class MainView extends AppLayout {
 
 	private static Tab[] getAvailableTabs() {
 		final List<Tab> tabs = new ArrayList<>(4);
-		tabs.add(createTab(VaadinIcon.EDIT, TITLE_STOREFRONT,
-						StorefrontView.class));
-		tabs.add(createTab(VaadinIcon.CLOCK,TITLE_DASHBOARD, DashboardView.class));
+
 		if (SecurityUtils.isAccessGranted(UsersView.class)) {
 			tabs.add(createTab(VaadinIcon.USER,TITLE_USERS, UsersView.class));
 		}

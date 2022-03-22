@@ -2,20 +2,16 @@ package com.adjusted.vaadin.groceryapp.ui.views.login;
 
 import com.adjusted.vaadin.groceryapp.app.security.SecurityUtils;
 import com.adjusted.vaadin.groceryapp.ui.utils.BakeryConst;
-import com.adjusted.vaadin.groceryapp.ui.views.storefront.StorefrontView;
+import com.adjusted.vaadin.groceryapp.ui.views.admin.products.ProductsView;
+import com.adjusted.vaadin.groceryapp.ui.views.person.PersonView;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.page.Viewport;
-import com.vaadin.flow.router.AfterNavigationEvent;
-import com.vaadin.flow.router.AfterNavigationObserver;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.*;
 
 @Route
-@PageTitle("Vaadin Demo Bakery App")
+@PageTitle("Url opener application")
 @JsModule("./styles/shared-styles.js")
 @Viewport(BakeryConst.VIEWPORT)
 public class LoginView extends LoginOverlay
@@ -24,7 +20,7 @@ public class LoginView extends LoginOverlay
 	public LoginView() {
 		LoginI18n i18n = LoginI18n.createDefault();
 		i18n.setHeader(new LoginI18n.Header());
-		i18n.getHeader().setTitle("Vaadin Demo Bakery App");
+		i18n.getHeader().setTitle("Url opener application");
 		i18n.getHeader().setDescription(
 			"admin@vaadin.com + admin\n" + "barista@vaadin.com + barista");
 		i18n.setAdditionalInformation(null);
@@ -41,7 +37,7 @@ public class LoginView extends LoginOverlay
 	@Override
 	public void beforeEnter(BeforeEnterEvent event) {
 		if (SecurityUtils.isUserLoggedIn()) {
-			event.forwardTo(StorefrontView.class);
+			event.forwardTo(ProductsView.class);
 		} else {
 			setOpened(true);
 		}

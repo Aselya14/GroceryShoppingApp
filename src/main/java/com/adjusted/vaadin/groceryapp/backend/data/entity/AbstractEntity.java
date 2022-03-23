@@ -43,4 +43,11 @@ public abstract class AbstractEntity implements Serializable {
 		return version == that.version &&
 				Objects.equals(id, that.id);
 	}
+
+	@Override
+	public String toString() {
+		return "AE{" +
+				"id=" + id +
+				'}';
+	}
 }

@@ -37,7 +37,8 @@ public class ProductsView extends AbstractBakeryCrudView<Product> {
 	@Override
 	protected void setupGrid(Grid<Product> grid) {
 		grid.addColumn(Product::getName).setHeader("Product Name").setFlexGrow(10);
-		grid.addColumn(Product::getName).setHeader("Product Url").setFlexGrow(10);
+		grid.addColumn(Product::getUrl).setHeader("Product Url").setFlexGrow(10);
+		grid.addColumn(Product::getAmount).setHeader("Product Amount").setFlexGrow(10);
 	}
 
 	@Override

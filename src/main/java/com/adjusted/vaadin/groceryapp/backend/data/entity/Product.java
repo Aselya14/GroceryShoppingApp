@@ -11,57 +11,60 @@ import java.util.Objects;
 @Entity
 public class Product extends AbstractEntity {
 
-	@NotBlank(message = "{bakery.name.required}")
-	@Size(max = 255)
-	@Column(unique = true)
-	private String name;
+    @NotBlank(message = "{bakery.name.required}")
+    @Size(max = 255)
+    @Column(unique = true)
+    private String name;
 
-	@NotBlank(message = "{bakery.url.required}")
-	@Size(max = 1000)
-	@Column(unique = true)
-	private String url;
+    @NotBlank(message = "{bakery.url.required}")
+    @Size(max = 1000)
+    @Column(unique = true)
+    private String url;
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    @Column
+    private Integer amount;
 
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Override
-	public String toString() {
-		return name;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		if (!super.equals(o)) {
-			return false;
-		}
-		Product that = (Product) o;
-		return Objects.equals(name, that.name);
-	}
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), name);
-	}
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                super.toString() +
+                "name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

@@ -12,8 +12,12 @@ import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
+import com.vaadin.flow.data.binder.Result;
+import com.vaadin.flow.data.binder.ValueContext;
+import com.vaadin.flow.data.converter.Converter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,16 +53,35 @@ public class ProductsView extends AbstractBakeryCrudView<Product> {
 	private static BinderCrudEditor<Product> createForm() {
 		TextField name = new TextField("Product name");
 		name.getElement().setAttribute("colspan", "2");
-		TextField url = new TextField("Product name");
-		name.getElement().setAttribute("colspan", "2");
+		TextField url = new TextField("Product url");
+		url.getElement().setAttribute("colspan", "2");
+		NumberField amount = new NumberField("Product amount");
+		amount.getElement().setAttribute("colspan", "2");
 
-		FormLayout form = new FormLayout(name);
+		FormLayout form = new FormLayout(name, url, amount);
 
 		BeanValidationBinder<Product> binder = new BeanValidationBinder<>(Product.class);
 
 		binder.bind(name, "name");
+		binder.bind(url, "url");
+		binder.forField(amount)
+				.withConverter(new Converter<Double, Integer>() {
+					@Override
+					public Result<Integer> convertToModel(Double value, ValueContext context) {
+						if (value == null) {
+							return Result.ok(0);
+						}
+					}
 
-		String currencySymbol = Currency.getInstance(BakeryConst.APP_LOCALE).getSymbol();
+					@Override
+					public Double convertToPresentation(Integer value, ValueContext context) {
+						if (value == null) {
+							return 0.0;
+						}
+						return value.doubleValue();
+					}
+				})
+				.bind(Product:: getAmount, Product:: setAmount);
 
 		return new BinderCrudEditor<>(binder, form);
 	}

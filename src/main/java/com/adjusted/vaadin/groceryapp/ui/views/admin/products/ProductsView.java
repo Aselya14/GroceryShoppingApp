@@ -11,27 +11,19 @@ import com.adjusted.vaadin.groceryapp.ui.utils.converters.CurrencyFormatter;
 import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.textfield.NumberField;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
-import com.vaadin.flow.data.binder.Result;
-import com.vaadin.flow.data.binder.ValueContext;
-import com.vaadin.flow.data.converter.Converter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-
-import java.util.Currency;
 
 
 @Route(value = BakeryConst.PAGE_PRODUCTS, layout = MainView.class)
 @PageTitle(BakeryConst.TITLE_PRODUCTS)
 @Secured(Role.ADMIN)
 public class ProductsView extends AbstractBakeryCrudView<Product> {
-
-	private CurrencyFormatter currencyFormatter = new CurrencyFormatter();
 
 	@Autowired
 	public ProductsView(ProductService service, CurrentUser currentUser) {
@@ -55,7 +47,7 @@ public class ProductsView extends AbstractBakeryCrudView<Product> {
 		name.getElement().setAttribute("colspan", "2");
 		TextField url = new TextField("Product url");
 		url.getElement().setAttribute("colspan", "2");
-		NumberField amount = new NumberField("Product amount");
+		IntegerField amount = new IntegerField("Product amount");
 		amount.getElement().setAttribute("colspan", "2");
 
 		FormLayout form = new FormLayout(name, url, amount);
@@ -64,24 +56,8 @@ public class ProductsView extends AbstractBakeryCrudView<Product> {
 
 		binder.bind(name, "name");
 		binder.bind(url, "url");
-		binder.forField(amount)
-				.withConverter(new Converter<Double, Integer>() {
-					@Override
-					public Result<Integer> convertToModel(Double value, ValueContext context) {
-						if (value == null) {
-							return Result.ok(0);
-						}
-					}
+		binder.bind(amount, "amount");
 
-					@Override
-					public Double convertToPresentation(Integer value, ValueContext context) {
-						if (value == null) {
-							return 0.0;
-						}
-						return value.doubleValue();
-					}
-				})
-				.bind(Product:: getAmount, Product:: setAmount);
 
 		return new BinderCrudEditor<>(binder, form);
 	}

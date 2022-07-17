@@ -3,6 +3,7 @@ package com.adjusted.vaadin.groceryapp.ui;
 import com.adjusted.vaadin.groceryapp.app.security.SecurityUtils;
 import com.adjusted.vaadin.groceryapp.ui.utils.BakeryConst;
 import com.adjusted.vaadin.groceryapp.ui.views.HasConfirmation;
+import com.adjusted.vaadin.groceryapp.ui.views.admin.ActionView;
 import com.adjusted.vaadin.groceryapp.ui.views.admin.products.ProductsView;
 import com.adjusted.vaadin.groceryapp.ui.views.admin.users.UsersView;
 import com.adjusted.vaadin.groceryapp.ui.views.person.PersonView;
@@ -103,6 +104,10 @@ public class MainView extends AppLayout {
 		if (SecurityUtils.isAccessGranted(PersonView.class)) {
 			tabs.add(createTab(VaadinIcon.CALENDAR, TITLE_PERSON, PersonView.class));
 		}
+		if (SecurityUtils.isAccessGranted(ActionView.class)) {
+			tabs.add(createTab(VaadinIcon.CALENDAR, TITLE_ACTION, ActionView.class));
+		}
+
 		final String contextPath = VaadinServlet.getCurrent().getServletContext().getContextPath();
 		final Tab logoutTab = createTab(createLogoutLink(contextPath));
 		tabs.add(logoutTab);

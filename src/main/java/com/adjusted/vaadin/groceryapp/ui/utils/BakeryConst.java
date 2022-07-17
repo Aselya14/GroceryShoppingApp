@@ -39,6 +39,7 @@ public class BakeryConst {
 	public static final String VIEWPORT = "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover";
 	public static final String TITLE_WEIGHT = "Weight";
 	public static final String PAGE_WEIGHT = "Weight" ;
+	public static final String TITLE_ACTION = "Action";
 
 	// Mutable for testing.
 	public static int NOTIFICATION_DURATION = 4000;

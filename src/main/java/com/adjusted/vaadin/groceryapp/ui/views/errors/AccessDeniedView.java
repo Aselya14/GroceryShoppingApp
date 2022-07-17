@@ -16,6 +16,7 @@ import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.templatemodel.TemplateModel;
 
+
 @Tag("access-denied-view")
 @JsModule("./src/views/errors/access-denied-view.js")
 @ParentLayout(MainView.class)

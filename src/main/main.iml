@@ -47,5 +47,6 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.29" level="project" />
     <orderEntry type="library" name="Maven: jakarta.annotation:jakarta.annotation-api:1.3.5" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-dialog-flow:14.6.3" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-ordered-layout-flow:14.6.3" level="project" />
   </component>
 </module>
